@@ -685,7 +685,31 @@ body.hero-ready .hero {
 .hero__central:hover .hero__branch-image {
   transform: scale(1.025) !important;
 }
+/* =========================================================
+   MOBILE HERO IMAGE
+========================================================= */
 
+@media (max-width: 768px) {
+
+  .hero__branch-image,
+  #heroBranchImage {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    border-radius: 50% !important;
+
+    transform: scale(1) !important;
+  }
+
+  .hero__central:hover .hero__branch-image {
+    transform: scale(1) !important;
+  }
+
+}
 
 /* =========================================================
    HERO ARROWS
