@@ -686,13 +686,12 @@ body.hero-ready .hero {
   transform: scale(1.025) !important;
 }
 /* =========================================================
-   MOBILE HERO IMAGE
+   MOBILE — BRANCH IMAGES
 ========================================================= */
 
 @media (max-width: 768px) {
 
-  .hero__branch-image,
-  #heroBranchImage {
+  #branches .branch-row img {
     width: 100% !important;
     height: 100% !important;
     max-width: none !important;
@@ -700,13 +699,13 @@ body.hero-ready .hero {
     object-fit: cover !important;
     object-position: center center !important;
 
-    border-radius: 50% !important;
+    border-radius: 0 !important;
 
-    transform: scale(1) !important;
+    transform: none !important;
   }
 
-  .hero__central:hover .hero__branch-image {
-    transform: scale(1) !important;
+  #branches .branch-row img:hover {
+    transform: none !important;
   }
 
 }
