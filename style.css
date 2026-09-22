@@ -52,7 +52,7 @@ body {
   position: relative;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Manrope", sans-serif;
+  font-family: Garamond, serif;
   overflow-x: hidden;
 }
 
@@ -685,6 +685,7 @@ body.hero-ready .hero {
 .hero__central:hover .hero__branch-image {
   transform: scale(1.025) !important;
 }
+
 /* =========================================================
    MOBILE — BRANCH IMAGES
 ========================================================= */
@@ -947,21 +948,24 @@ body.hero-ready .hero {
 }
 
 .hero-shape--circle {
-  width:
-    min(40vw, 600px);
+   width: min(35vw, 550px) !important;
 
-  aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1 !important;
 
-  left: 50%;
-  top: 53%;
+    left: 50% !important;
+    top: 50% !important;
 
-  transform:
-    translate(-50%, -50%);
+    transform: translate(-50%, -50%) !important;
 
-  border:
-    1px solid rgba(116, 21, 38, .14);
+    border: 1px solid rgba(116, 21, 38, .14) !important;
 
-  border-radius: 50%;
+    border-radius: 50% !important;
+
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    pointer-events: none;
 }
 
 .hero-shape--dot {
@@ -3941,4 +3945,1800 @@ body.qsu-loading {
 .footer-bottom {
   position: relative;
   z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   QSU — MOBILE COMPATIBILITY OVERRIDES
+   Add this at the VERY BOTTOM of style.css
+========================================================= */
+
+/* ---------------------------------------------------------
+   GLOBAL MOBILE SAFETY
+--------------------------------------------------------- */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+.pill-btn,
+.icon-btn,
+.arrow-btn,
+.hero__arrow,
+.quiz-opt,
+.guidance-opt {
+  touch-action: manipulation;
+}
+
+
+/* =========================================================
+   TABLET — 1000px
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  :root {
+    --side-pad: 32px;
+  }
+
+  /* NAV */
+
+  .nav {
+    padding-left: var(--side-pad);
+    padding-right: var(--side-pad);
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  .nav__burger {
+    display: grid;
+    place-items: center;
+  }
+
+
+  /* HERO */
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero__stage {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero__type,
+  #heroType {
+    max-width: 100%;
+    padding-inline: 20px !important;
+    font-size: clamp(4.5rem, 14vw, 9rem) !important;
+    white-space: nowrap !important;
+  }
+
+
+  /* BRANCHES */
+
+  .branch-row {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .branch-row__content {
+    min-width: 0;
+  }
+
+  .branch-row__description {
+    max-width: 100%;
+  }
+
+
+  /* GUIDANCE */
+
+  .guidance {
+    min-width: 0;
+  }
+
+  .guidance > div {
+    min-width: 0;
+  }
+
+
+  /* FOOTER */
+
+  .footer-top {
+    min-width: 0;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE — 760px
+========================================================= */
+
+@media (max-width: 760px) {
+
+  :root {
+    --nav-height: 72px;
+    --side-pad: 18px;
+  }
+
+
+  /* -------------------------------------------------------
+     GLOBAL
+  ------------------------------------------------------- */
+
+  .wrap {
+    width: calc(100% - (var(--side-pad) * 2));
+    max-width: 100%;
+  }
+
+  section {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+
+  /* -------------------------------------------------------
+     NAVIGATION
+  ------------------------------------------------------- */
+
+  .nav {
+    height: var(--nav-height);
+    padding-inline: var(--side-pad);
+  }
+
+  .nav__mark {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .nav__logo {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+  }
+
+  .nav__mark span {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nav__actions {
+    flex-shrink: 0;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE MENU
+  ------------------------------------------------------- */
+
+  .mobile-menu {
+    padding:
+      calc(var(--nav-height) + 30px)
+      var(--side-pad)
+      40px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mob-link {
+    font-size: clamp(2.5rem, 13vw, 5rem);
+    line-height: .95;
+  }
+
+  .mobile-menu__close {
+    top: 18px;
+    right: var(--side-pad);
+  }
+
+
+  /* -------------------------------------------------------
+     HERO
+  ------------------------------------------------------- */
+
+  .hero {
+    min-height: 100svh;
+    min-height: 100dvh;
+
+    padding:
+      calc(var(--nav-height) + 20px)
+      var(--side-pad)
+      70px;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero__stage {
+    width: 100%;
+    max-width: 100%;
+
+    height: clamp(430px, 75svh, 560px);
+    min-height: 430px;
+
+    margin: 0 auto;
+  }
+
+
+  /* HERO TITLE */
+
+  .hero__type,
+  #heroType {
+    top: 7% !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    padding: 0 10px !important;
+
+    font-size:
+      clamp(3rem, 14vw, 5.5rem) !important;
+
+    line-height: .82 !important;
+
+    letter-spacing: -.065em !important;
+
+    white-space: nowrap !important;
+
+    overflow: visible !important;
+  }
+
+
+  /* HERO IMAGE */
+
+  .hero__central,
+  .hero__visual {
+    width:
+      min(72vw, 340px) !important;
+
+    height:
+      min(72vw, 340px) !important;
+
+    max-width: 340px !important;
+    max-height: 340px !important;
+  }
+
+  .hero__circle,
+  .hero__image-wrap {
+    width: 100% !important;
+    height: 100% !important;
+
+    border-width: 6px !important;
+  }
+
+  .hero__branch-image,
+  #heroBranchImage {
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    border-radius: 50% !important;
+  }
+
+
+  /* HERO ARROWS */
+
+  .hero__arrows,
+  .hero__branch-controls {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .arrow-btn,
+  .hero__arrow,
+  #prevBranch,
+  #nextBranch {
+    width: 44px !important;
+    height: 44px !important;
+
+    min-width: 44px !important;
+    min-height: 44px !important;
+
+    top: 52% !important;
+
+    font-size: 18px !important;
+  }
+
+  #prevBranch,
+  .hero__arrow--prev {
+    left: 0 !important;
+  }
+
+  #nextBranch,
+  .hero__arrow--next {
+    right: 0 !important;
+  }
+
+  .arrow-btn svg {
+    width: 19px;
+    height: 19px;
+  }
+
+
+  /* HERO DESCRIPTION */
+
+  .hero__desc {
+    left: 50% !important;
+
+    bottom: 8% !important;
+
+    width: calc(100% - 30px) !important;
+    max-width: 500px !important;
+
+    padding-inline: 5px;
+
+    font-size: .88rem !important;
+    line-height: 1.5 !important;
+  }
+
+
+  /* HERO SUB */
+
+  .hero__sub {
+    left: 50% !important;
+
+    bottom: 14% !important;
+
+    width: calc(100% - 30px) !important;
+
+    font-size: .72rem !important;
+    line-height: 1.4 !important;
+  }
+
+
+  /* HERO EYEBROW */
+
+  .hero__eyebrow {
+    bottom: 18% !important;
+
+    width: calc(100% - 30px) !important;
+
+    font-size: .62rem !important;
+
+    letter-spacing: .13em !important;
+
+    white-space: normal !important;
+  }
+
+
+  /* HERO DOTS */
+
+  .hero__dots {
+    bottom: 3% !important;
+
+    width: 100%;
+  }
+
+
+  /* HERO SHAPES */
+
+  .hero-shape--circle {
+    width: 95vw;
+    max-width: 430px;
+  }
+
+
+  /* -------------------------------------------------------
+     SECTION HEADINGS
+  ------------------------------------------------------- */
+
+  .section-head h2,
+  .guidance h2,
+  .start-branch h2,
+  .about h2 {
+    font-size:
+      clamp(2.5rem, 12vw, 4.5rem);
+
+    line-height: .9;
+    letter-spacing: -.06em;
+  }
+
+  .section-head p,
+  .guidance > div > p,
+  .start-branch > p {
+    width: 100%;
+    max-width: 100%;
+
+    font-size: .95rem;
+    line-height: 1.65;
+  }
+
+
+  /* -------------------------------------------------------
+     BRANCHES
+  ------------------------------------------------------- */
+
+  #branches {
+    padding: 90px 0;
+  }
+
+  #branches .section-head {
+    margin-bottom: 55px;
+  }
+
+  .branches-list {
+    width: 100%;
+  }
+
+  .branch-row {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    min-height: auto;
+
+    padding:
+      45px 0
+      55px;
+
+    gap: 35px;
+  }
+
+  .branch-row__visual {
+    width: 100%;
+
+    order: 1;
+
+    min-width: 0;
+  }
+
+  .branch-row__image {
+    width: min(82vw, 330px);
+    max-width: 330px;
+
+    height: auto;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+  }
+
+  .branch-row__content {
+    width: 100%;
+    min-width: 0;
+
+    order: 2;
+
+    padding: 0;
+  }
+
+  .branch-row__content h3 {
+    font-size:
+      clamp(2.7rem, 13vw, 5rem);
+
+    line-height: .9;
+  }
+
+  .branch-row__description {
+    width: 100%;
+    max-width: 100%;
+
+    margin-top: 20px;
+
+    font-size: .98rem;
+    line-height: 1.65;
+  }
+
+  .branch-row__tags {
+    width: 100%;
+  }
+
+  .branch-row__tag {
+    font-size: .62rem;
+    padding: 6px 10px;
+  }
+
+
+  /* IMPORTANT:
+     Your intro currently uses top: 350px.
+     That pushes it way down on mobile.
+  */
+
+  .branches-intro-Journalism {
+    width: 100%;
+    max-width: 100%;
+
+    position: static !important;
+
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+
+    margin:
+      0 0 45px !important;
+
+    padding: 0 !important;
+
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+
+  /* -------------------------------------------------------
+     JOURNEY
+  ------------------------------------------------------- */
+
+  #journey {
+    padding: 90px 0;
+  }
+
+  .journey .section-head {
+    margin-bottom: 55px;
+  }
+
+  .journey-track {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+  .journey__step,
+  .journey__step:nth-child(3) {
+    width: 100%;
+    min-width: 0;
+
+    padding:
+      30px 0;
+
+    border-left: 0;
+
+    border-top:
+      1px solid var(--line);
+  }
+
+  .journey__step:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .journey__number {
+    margin-bottom: 22px;
+  }
+
+  .journey__step h3 {
+    font-size:
+      clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  .journey__step p {
+    font-size: .95rem;
+  }
+
+
+  /* -------------------------------------------------------
+     VOLUNTEER
+  ------------------------------------------------------- */
+
+  #volunteer {
+    padding: 90px 0;
+  }
+
+  #volunteer .section-head {
+    margin-bottom: 55px;
+  }
+
+  .vol-strip {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .volunteer-card {
+    width: 100%;
+    min-height: 0;
+
+    padding:
+      32px 22px;
+
+    border-right: 0 !important;
+
+    border-bottom:
+      1px solid var(--line);
+  }
+
+  .volunteer-card:last-child {
+    border-bottom: 0;
+  }
+
+  .volunteer-card h3 {
+    margin-top: 35px;
+
+    font-size:
+      clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .volunteer-card p {
+    font-size: .95rem;
+  }
+
+
+  /* -------------------------------------------------------
+     EVENT TIMELINE
+  ------------------------------------------------------- */
+
+  .qsu-events {
+    width: 100%;
+
+    margin-top: 65px;
+
+    padding-left: 38px;
+    padding-right: 0;
+  }
+
+  .qsu-events::before,
+  .qsu-events__progress {
+    left: 6px;
+  }
+
+  .qsu-event {
+    width: 100%;
+
+    padding-bottom: 50px;
+  }
+
+  .qsu-event__pin {
+    left: -39px;
+
+    width: 16px;
+    height: 16px;
+  }
+
+  .qsu-event__card {
+    width: 100%;
+    max-width: none;
+
+    padding: 20px;
+
+    overflow-wrap: break-word;
+  }
+
+  .qsu-event__card h3 {
+    font-size:
+      clamp(1.4rem, 7vw, 2.2rem);
+
+    line-height: 1;
+  }
+
+  .qsu-event__card p {
+    font-size: .92rem;
+    line-height: 1.6;
+  }
+
+
+  /* -------------------------------------------------------
+     GUIDANCE
+  ------------------------------------------------------- */
+
+  #guidance {
+    padding: 90px 0;
+  }
+
+  .guidance {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+  }
+
+  .guidance__visual {
+    order: -1;
+
+    width: 100%;
+  }
+
+  .guidance__visual img {
+    width: min(78vw, 330px);
+    max-width: 330px;
+  }
+
+  .guidance__actions {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .guidance__actions .pill-btn {
+    width: 100%;
+  }
+
+
+  /* -------------------------------------------------------
+     START A BRANCH
+  ------------------------------------------------------- */
+
+  #start {
+    padding: 90px 0;
+  }
+
+  .start-branch {
+    width: 100%;
+  }
+
+  .start-branch h2 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  /* -------------------------------------------------------
+     ABOUT
+  ------------------------------------------------------- */
+
+  #about {
+    padding: 90px 0;
+  }
+
+  .about-copy {
+    width: 100%;
+    max-width: 100%;
+
+    margin-top: 50px;
+    margin-left: 0;
+  }
+
+  .about-copy > p {
+    font-size: .98rem;
+    line-height: 1.75;
+  }
+
+  .about-stats {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    margin-top: 55px;
+  }
+
+  .about-stats > div {
+    padding:
+      30px 10px;
+
+    border-right: 0;
+
+    border-bottom:
+      1px solid var(--line);
+  }
+
+  .about-stats > div:last-child {
+    border-bottom: 0;
+  }
+
+  .about-stats b {
+    font-size:
+      clamp(3.5rem, 17vw, 6rem);
+  }
+
+
+  /* -------------------------------------------------------
+     FOOTER
+  ------------------------------------------------------- */
+
+  footer {
+    padding:
+      70px 0
+      25px;
+  }
+
+  .footer-top {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+
+    padding-bottom: 45px;
+  }
+
+  .footer-brand > p {
+    max-width: 100%;
+  }
+
+  .footer-links {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+  }
+
+  .footer-bottom {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    gap: 18px;
+  }
+
+  .socials {
+    flex-wrap: wrap;
+  }
+
+
+  /* -------------------------------------------------------
+     MODALS
+  ------------------------------------------------------- */
+
+  .modal-overlay {
+    padding: 15px;
+    align-items: center;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 100%;
+
+    max-height: calc(100svh - 30px);
+
+    padding:
+      45px 20px 25px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal__close {
+    top: 12px;
+    right: 12px;
+
+    width: 38px;
+    height: 38px;
+  }
+
+  .modal h2 {
+    font-size:
+      clamp(2.2rem, 11vw, 4rem);
+
+    max-width: 100%;
+
+    overflow-wrap: break-word;
+  }
+
+  .modal > p,
+  .quiz-step > p {
+    font-size: .94rem;
+  }
+
+
+  /* -------------------------------------------------------
+     QUIZ
+  ------------------------------------------------------- */
+
+  .quiz-progress {
+    margin-bottom: 30px;
+  }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    width: 100%;
+  }
+
+  .quiz-opt {
+    width: 100%;
+    min-height: 52px;
+
+    padding: 15px;
+  }
+
+  .result-stats {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .result-stats > div {
+    padding: 20px 5px;
+  }
+
+  .result-stats b {
+    font-size: 1.5rem;
+  }
+
+  .result-stats span {
+    font-size: .58rem;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .result-actions .pill-btn {
+    width: 100%;
+  }
+
+
+  /* -------------------------------------------------------
+     START FORM
+  ------------------------------------------------------- */
+
+  #startForm {
+    width: 100%;
+  }
+
+  #startForm input,
+  #startForm textarea {
+    width: 100%;
+    max-width: 100%;
+
+    font-size: 16px;
+  }
+
+  #startForm .pill-btn {
+    width: 100%;
+  }
+
+
+  /* -------------------------------------------------------
+     LOADER
+  ------------------------------------------------------- */
+
+  .qsu-loader__content {
+    width:
+      min(500px, calc(100% - 40px));
+  }
+
+  .qsu-loader__logo-wrap {
+    width: 105px;
+    height: 105px;
+
+    margin-bottom: 28px;
+  }
+
+  .qsu-loader__name {
+    font-size: .65rem;
+    letter-spacing: .14em;
+  }
+
+  .qsu-loader__progress {
+    gap: 10px;
+  }
+
+  .qsu-loader__percent {
+    width: 34px;
+  }
+
+  .qsu-loader__welcome-big {
+    font-size:
+      clamp(3rem, 17vw, 5rem);
+  }
+
+  .qsu-loader__corner {
+    width: 65px;
+    height: 65px;
+  }
+
+  .qsu-loader__corner--tl {
+    top: 18px;
+    left: 18px;
+  }
+
+  .qsu-loader__corner--br {
+    right: 18px;
+    bottom: 18px;
+  }
+
+
+  /* -------------------------------------------------------
+     DECORATIVE GRAPHICS
+     
+     Keep them visible, but scale them down so they don't
+     create giant visual/scrolling problems on phones.
+  ------------------------------------------------------- */
+
+  .qsu-decor {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .qsu-blob,
+  .qsu-ring,
+  .qsu-arc,
+  .qsu-half,
+  .qsu-diamond,
+  .qsu-triangle,
+  .qsu-capsule,
+  .qsu-square,
+  .qsu-oval,
+  .qsu-wedge {
+    transform-origin: center;
+  }
+
+  .blob-01 {
+    width: 230px;
+    height: 230px;
+    left: -130px;
+  }
+
+  .blob-02 {
+    width: 190px;
+    height: 190px;
+    right: -100px;
+  }
+
+  .blob-03 {
+    width: 220px;
+    height: 220px;
+    left: -120px;
+  }
+
+  .blob-04,
+  .blob-05,
+  .blob-06,
+  .blob-07,
+  .blob-08,
+  .blob-09,
+  .blob-10,
+  .blob-11,
+  .blob-12,
+  .blob-13,
+  .blob-14,
+  .blob-15 {
+    transform: scale(.72);
+  }
+
+  .qsu-ring {
+    transform: scale(.65);
+  }
+
+  .qsu-arc {
+    transform: scale(.7);
+  }
+
+  .qsu-half {
+    transform: scale(.7);
+  }
+
+  .qsu-diamond {
+    transform:
+      rotate(45deg)
+      scale(.7);
+  }
+
+  .qsu-triangle {
+    transform: scale(.7);
+  }
+
+  .qsu-capsule {
+    transform: scale(.7);
+  }
+
+  .qsu-square {
+    transform: scale(.7);
+  }
+
+  .qsu-oval {
+    transform: scale(.7);
+  }
+
+  .qsu-wedge {
+    transform: scale(.7);
+  }
+
+  .qsu-number {
+    font-size:
+      clamp(5rem, 25vw, 9rem);
+  }
+
+
+  /* -------------------------------------------------------
+     BUTTONS / TOUCH TARGETS
+  ------------------------------------------------------- */
+
+  .pill-btn {
+    min-height: 48px;
+
+    padding:
+      0 22px;
+
+    font-size: .78rem;
+  }
+
+  .branch-row__arrow {
+    width: 46px;
+    height: 46px;
+  }
+
+
+  /* -------------------------------------------------------
+     PREVENT LONG WORDS FROM BREAKING THE LAYOUT
+  ------------------------------------------------------- */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  span,
+  a,
+  button {
+    overflow-wrap: break-word;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES — 480px
+========================================================= */
+
+@media (max-width: 480px) {
+
+  :root {
+    --side-pad: 15px;
+  }
+
+
+  /* NAV */
+
+  .nav {
+    padding-inline: 15px;
+  }
+
+  .nav__logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav__mark span {
+    max-width: 125px;
+    font-size: .82rem;
+  }
+
+
+  /* HERO */
+
+  .hero {
+    padding-inline: 15px;
+  }
+
+  .hero__stage {
+    height: 425px;
+    min-height: 425px;
+  }
+
+  .hero__type,
+  #heroType {
+    top: 6% !important;
+
+    font-size:
+      clamp(2.6rem, 13vw, 4.2rem) !important;
+  }
+
+  .hero__central,
+  .hero__visual {
+    width: 64vw !important;
+    height: 64vw !important;
+
+    max-width: 290px !important;
+    max-height: 290px !important;
+  }
+
+  .arrow-btn,
+  .hero__arrow,
+  #prevBranch,
+  #nextBranch {
+    width: 40px !important;
+    height: 40px !important;
+
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+
+  #prevBranch,
+  .hero__arrow--prev {
+    left: -2px !important;
+  }
+
+  #nextBranch,
+  .hero__arrow--next {
+    right: -2px !important;
+  }
+
+  .hero__desc {
+    bottom: 8% !important;
+
+    font-size: .82rem !important;
+  }
+
+  .hero__sub {
+    bottom: 14% !important;
+
+    font-size: .68rem !important;
+  }
+
+  .hero__eyebrow {
+    bottom: 19% !important;
+
+    font-size: .55rem !important;
+  }
+
+
+  /* SECTION HEADINGS */
+
+  .section-head h2,
+  .guidance h2,
+  .start-branch h2,
+  .about h2 {
+    font-size:
+      clamp(2.3rem, 12vw, 3.8rem);
+  }
+
+
+  /* BRANCHES */
+
+  .branch-row {
+    padding:
+      40px 0
+      50px;
+  }
+
+  .branch-row__image {
+    width: min(80vw, 290px);
+  }
+
+  .branch-row__content h3 {
+    font-size:
+      clamp(2.5rem, 13vw, 4rem);
+  }
+
+  .branches-intro-Journalism {
+    font-size: .92rem;
+  }
+
+
+  /* EVENTS */
+
+  .qsu-events {
+    padding-left: 32px;
+  }
+
+  .qsu-events::before,
+  .qsu-events__progress {
+    left: 4px;
+  }
+
+  .qsu-event__pin {
+    left: -34px;
+  }
+
+  .qsu-event__card {
+    padding: 17px;
+  }
+
+
+  /* FOOTER */
+
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+
+  /* MODALS */
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal {
+    max-height: calc(100svh - 20px);
+
+    padding:
+      42px 17px 22px;
+  }
+
+  .modal h2 {
+    font-size:
+      clamp(2rem, 11vw, 3rem);
+  }
+
+
+  /* QUIZ */
+
+  .result-stats b {
+    font-size: 1.3rem;
+  }
+
+  .result-stats span {
+    font-size: .52rem;
+    letter-spacing: .04em;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES — 360px
+========================================================= */
+
+@media (max-width: 360px) {
+
+  :root {
+    --side-pad: 12px;
+  }
+
+  .nav {
+    padding-inline: 12px;
+  }
+
+  .nav__mark span {
+    max-width: 100px;
+    font-size: .75rem;
+  }
+
+  .hero__stage {
+    height: 390px;
+    min-height: 390px;
+  }
+
+  .hero__type,
+  #heroType {
+    font-size: 2.35rem !important;
+  }
+
+  .hero__central,
+  .hero__visual {
+    width: 61vw !important;
+    height: 61vw !important;
+  }
+
+  .arrow-btn,
+  .hero__arrow,
+  #prevBranch,
+  #nextBranch {
+    width: 36px !important;
+    height: 36px !important;
+
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+
+  .hero__desc {
+    font-size: .76rem !important;
+  }
+
+  .hero__sub {
+    font-size: .62rem !important;
+  }
+
+  .branch-row__content h3 {
+    font-size: 2.4rem;
+  }
+
+  .section-head h2,
+  .guidance h2,
+  .start-branch h2,
+  .about h2 {
+    font-size: 2.25rem;
+  }
+
+  .qsu-event__card {
+    padding: 15px;
+  }
+
+}
+
+
+/* =========================================================
+   LANDSCAPE PHONES
+========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .hero {
+    min-height: 650px;
+  }
+
+  .hero__stage {
+    height: 560px;
+    min-height: 560px;
+  }
+
+  .hero__central,
+  .hero__visual {
+    width: 260px !important;
+    height: 260px !important;
+  }
+
+  .hero__type,
+  #heroType {
+    top: 4% !important;
+  }
+
+  .hero__desc {
+    bottom: 5% !important;
+  }
+
+  .hero__sub {
+    bottom: 11% !important;
+  }
+
+  .hero__dots {
+    bottom: 1% !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE ACCESSIBILITY
+========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+  .icon-btn:hover,
+  .arrow-btn:hover,
+  .hero__arrow:hover,
+  .pill-btn:hover,
+  .branch-row__arrow:hover,
+  .qsu-event__card:hover,
+  .volunteer-card:hover {
+    transform: none;
+  }
+
+  .hero__central:hover .hero__branch-image,
+  .branch-row__visual:hover .branch-row__image,
+  .guidance__visual:hover img {
+    transform: none;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION — MOBILE SAFE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .qsu-blob {
+    animation: none !important;
+  }
+
+  .qsu-loader__ring {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   MOBILE HERO — BRANCH SELECTOR + HERO TYPE
+========================================================= */
+
+@media (max-width: 760px) {
+
+  /* -------------------------------------------------------
+     HERO TYPE — MOVE LOWER
+  ------------------------------------------------------- */
+
+  .hero__type,
+  #heroType {
+    top: 15% !important;
+  }
+
+
+  /* -------------------------------------------------------
+     OUTER BRANCH SELECTOR
+     
+     This controls the circular hero area and keeps the
+     branch navigation contained on mobile.
+  ------------------------------------------------------- */
+
+  .hero__stage {
+    overflow: visible !important;
+  }
+
+  .hero__central,
+  .hero__visual {
+    width: min(66vw, 315px) !important;
+    height: min(66vw, 315px) !important;
+
+    max-width: 315px !important;
+    max-height: 315px !important;
+
+    margin: 0 auto;
+  }
+
+
+  /* -------------------------------------------------------
+     OUTER CIRCLE
+  ------------------------------------------------------- */
+
+  .hero__circle,
+  .hero__image-wrap {
+    width: 100% !important;
+    height: 100% !important;
+
+    border-radius: 50% !important;
+  }
+
+
+  /* -------------------------------------------------------
+     BRANCH IMAGE
+  ------------------------------------------------------- */
+
+  .hero__branch-image,
+  #heroBranchImage {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    border-radius: 50% !important;
+  }
+
+
+  /* -------------------------------------------------------
+     BRANCH SELECTOR ARROWS
+  ------------------------------------------------------- */
+
+  .hero__arrows,
+  .hero__branch-controls {
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    pointer-events: none;
+  }
+
+  .arrow-btn,
+  .hero__arrow,
+  #prevBranch,
+  #nextBranch {
+    position: absolute !important;
+
+    top: 50% !important;
+
+    transform: translateY(-50%) !important;
+
+    width: 42px !important;
+    height: 42px !important;
+
+    min-width: 42px !important;
+    min-height: 42px !important;
+
+    z-index: 20;
+
+    pointer-events: auto;
+  }
+
+
+  /* LEFT ARROW */
+
+  #prevBranch,
+  .hero__arrow--prev {
+    left: -20px !important;
+    right: auto !important;
+  }
+
+
+  /* RIGHT ARROW */
+
+  #nextBranch,
+  .hero__arrow--next {
+    right: -20px !important;
+    left: auto !important;
+  }
+
+
+  /* -------------------------------------------------------
+     ARROW ICONS
+  ------------------------------------------------------- */
+
+  .arrow-btn svg,
+  .hero__arrow svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 480px) {
+
+  /* Move title slightly lower */
+
+  .hero__type,
+  #heroType {
+    top: 17% !important;
+  }
+
+
+  /* Smaller branch selector */
+
+  .hero__central,
+  .hero__visual {
+    width: min(64vw, 285px) !important;
+    height: min(64vw, 285px) !important;
+
+    max-width: 285px !important;
+    max-height: 285px !important;
+  }
+
+
+  /* Smaller arrows */
+
+  .arrow-btn,
+  .hero__arrow,
+  #prevBranch,
+  #nextBranch {
+    width: 38px !important;
+    height: 38px !important;
+
+    min-width: 38px !important;
+    min-height: 38px !important;
+  }
+
+  #prevBranch,
+  .hero__arrow--prev {
+    left: -17px !important;
+  }
+
+  #nextBranch,
+  .hero__arrow--next {
+    right: -17px !important;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .hero__type,
+  #heroType {
+    top: 19% !important;
+  }
+
+
+  .hero__central,
+  .hero__visual {
+    width: 61vw !important;
+    height: 61vw !important;
+
+    max-width: 255px !important;
+    max-height: 255px !important;
+  }
+
+
+  .arrow-btn,
+  .hero__arrow,
+  #prevBranch,
+  #nextBranch {
+    width: 35px !important;
+    height: 35px !important;
+
+    min-width: 35px !important;
+    min-height: 35px !important;
+  }
+
+  #prevBranch,
+  .hero__arrow--prev {
+    left: -15px !important;
+  }
+
+  #nextBranch,
+  .hero__arrow--next {
+    right: -15px !important;
+  }
+
 }
