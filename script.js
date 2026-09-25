@@ -12,9 +12,9 @@
 const CONFIG = {
   googleForms: {
     journalism: "https://docs.google.com/forms/d/e/1FAIpQLSeHrVETIpUTLZaqHLSuOesa07tpMRApQJ5N0X2T-z_ukA0E1Q/viewform?usp=publish-editor",
-    performing: "https://forms.gle/YOUR-PERFORMING-ARTS-FORM",
-    sports: "https://forms.gle/YOUR-SPORTS-FORM",
-    counselling: "https://forms.gle/YOUR-COUNSELLING-FORM"
+    performing: "",
+    sports: "",
+    counselling: ""
   }
 };
 
@@ -27,7 +27,7 @@ const IMAGE_PATHS = {
   journalism: "Journa.png",
   performing: "masks.png",
   sports: "sports.png",
-  counselling: "images.png",
+  counselling: "Counselling-removebg-preview.png",
   logo: "QSU_LOGO_NO_TEXT-removebg-preview.png"
 };
 
@@ -46,35 +46,18 @@ const BRANCHES = [
       "Write, investigate, interview, and tell the stories that matter to students.",
     quote:
       "Turn curiosity into stories people actually want to read.",
-    activities: 8,
-    events: 4,
-    volunteer: 6,
+    activities: 0,
+    events: 0,
+    volunteer: 0,
     tags: [
       "Writing",
       "Research",
       "Media"
     ]
   },
-
-  {
-    id: "performing",
-    name: "Performative Arts",
-    type: "PERFORMATIVE ARTS",
-    image: IMAGE_PATHS.performing,
-    description:
-      "Perform, create, collaborate, and bring ideas to life through the stage.",
-    quote:
-      "Turn expression into something people can experience.",
-    activities: 7,
-    events: 5,
-    volunteer: 4,
-    tags: [
-      "Acting",
-      "Performance",
-      "Creative"
-    ]
-  },
-
+//
+ 
+//
   {
     id: "sports",
     name: "Sports",
@@ -84,9 +67,9 @@ const BRANCHES = [
       "Train, compete, stay active, and build something stronger with your team.",
     quote:
       "Compete hard, grow together, and enjoy the game.",
-    activities: 10,
-    events: 6,
-    volunteer: 7,
+    activities: 0,
+    events: 0,
+    volunteer: 0,
     tags: [
       "Competition",
       "Fitness",
@@ -103,9 +86,9 @@ const BRANCHES = [
       "Listen, support, understand, and help create a healthier student community.",
     quote:
       "Sometimes helping someone starts with simply listening.",
-    activities: 6,
-    events: 3,
-    volunteer: 8,
+    activities: 0,
+    events: 0,
+    volunteer: 0,
     tags: [
       "Support",
       "Wellbeing",
