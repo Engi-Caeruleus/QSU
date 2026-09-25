@@ -16,6 +16,8 @@
   --maroon-dark: #4d0d1a;
   --maroon-light: #92263b;
 
+  --green-light: #708244;
+
   --ink: #251b17;
   --ink-soft: #685d55;
 
@@ -1087,7 +1089,7 @@ body.hero-ready .hero {
 
   aspect-ratio: 1 / 1;
 
-  object-fit: cover;
+  object-fit: contain !important;
 
   border-radius: 50%;
 
@@ -4298,7 +4300,7 @@ button,
 
     max-width: none !important;
 
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
 
     border-radius: 50% !important;
@@ -5570,7 +5572,7 @@ button,
     width: 100% !important;
     height: 100% !important;
 
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
 
     border-radius: 50% !important;
