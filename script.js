@@ -11,10 +11,10 @@
 
 const CONFIG = {
   googleForms: {
-    journalism: "https://docs.google.com/forms/d/e/1FAIpQLSeHrVETIpUTLZaqHLSuOesa07tpMRApQJ5N0X2T-z_ukA0E1Q/viewform?usp=publish-editor",
+    journalism: "https://forms.gle/DVzwSnZdtY36hqqS7",
     performing: "",
     sports: "https://forms.gle/ApeMGoR4PPRdi5FE8",
-    counselling: "https://forms.gle/DVzwSnZdtY36hqqS7"
+    counselling: ""
   }
 };
 
