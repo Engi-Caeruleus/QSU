@@ -668,6 +668,7 @@ body.hero-ready .hero {
   max-width: none !important;
 
   object-fit: cover !important;
+  
 
   border-radius: 50% !important;
 
@@ -686,6 +687,45 @@ body.hero-ready .hero {
 
 .hero__central:hover .hero__branch-image {
   transform: scale(1.025) !important;
+}
+
+/* =========================================================
+   DESKTOP / PC
+========================================================= */
+@media (min-width: 1401px) {
+
+  .branch-row__image {
+    width: min(80%, 500px);
+    height: 500px;
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 50%;
+    display: block;
+
+    box-shadow:
+      0 25px 70px rgba(37, 27, 23, .16);
+  }
+
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+@media (min-width: 1001px) and (max-width: 1400px) {
+
+  #branches .branch-row img {
+    width: min(85%, 460px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+  }
+
 }
 
 /* =========================================================
@@ -1084,21 +1124,17 @@ body.hero-ready .hero {
 }
 
 .branch-row__image {
-  width:
-    min(80%, 500px);
-
-  aspect-ratio: 1 / 1;
+  width: min(82vw, 330px);
+  height: min(82vw, 330px);
+  max-width: 330px;
+  max-height: 330px;
 
   object-fit: contain !important;
-
+  object-position: center;
   border-radius: 50%;
-
-  box-shadow:
-    0 25px 70px rgba(37, 27, 23, .16);
-
-  transition:
-    transform .8s var(--ease);
+  display: block;
 }
+
 
 .branch-row__visual:hover .branch-row__image {
   transform:
@@ -2658,423 +2694,6 @@ body.qsu-loading {
   outline-offset: 4px;
 }
 
-
-/* =========================================================
-   RESPONSIVE — TABLET
-========================================================= */
-
-@media (max-width: 1000px) {
-
-  .nav__links {
-    display: none;
-  }
-
-  .nav__burger {
-    display: grid;
-  }
-
-  .hero__stage {
-    height: 560px;
-    min-height: 560px;
-  }
-
-  .hero__type,
-  #heroType {
-    font-size:
-      clamp(6rem, 16vw, 10rem);
-  }
-
-  .branch-row {
-    min-height: 480px;
-  }
-
-  .journey-track {
-    grid-template-columns:
-      repeat(2, 1fr);
-
-    row-gap: 70px;
-  }
-
-  .journey__step:nth-child(3) {
-    border-left: 0;
-    padding-left: 0;
-  }
-
-  .vol-strip {
-    grid-template-columns:
-      repeat(2, 1fr);
-  }
-
-  .volunteer-card:nth-child(2) {
-    border-right: 0;
-  }
-
-  .volunteer-card:nth-child(-n+2) {
-    border-bottom:
-      1px solid var(--line);
-  }
-
-  .guidance {
-    grid-template-columns: 1fr;
-
-    gap: 60px;
-  }
-
-  .guidance__visual {
-    order: -1;
-  }
-
-  .footer-top {
-    grid-template-columns: 1fr;
-
-    gap: 60px;
-  }
-}
-
-
-/* =========================================================
-   RESPONSIVE — MOBILE
-========================================================= */
-
-@media (max-width: 760px) {
-
-  :root {
-    --nav-height: 72px;
-    --side-pad: 22px;
-  }
-
-  .nav {
-    height: var(--nav-height);
-  }
-
-  .nav__logo {
-    width: 32px;
-    height: 32px;
-  }
-
-  .hero {
-    min-height: 100svh;
-
-    padding-top:
-      calc(var(--nav-height) + 30px);
-  }
-
-  .hero__stage {
-    height: 500px;
-    min-height: 500px;
-  }
-
-  .hero__type,
-  #heroType {
-    top: 8% !important;
-
-    font-size:
-      clamp(3.5rem, 15vw, 6rem) !important;
-
-    line-height: .8;
-  }
-
-  .hero .hero__type .char-motion {
-    font-size: inherit !important;
-  }
-
-  .hero__central,
-  .hero__visual {
-    width:
-      min(62vw, 340px) !important;
-
-    height:
-      min(62vw, 340px) !important;
-  }
-
-  .hero__circle,
-  .hero__image-wrap {
-    border-width: 7px !important;
-  }
-
-  .arrow-btn,
-  .hero__arrow,
-  #prevBranch,
-  #nextBranch {
-    width: 45px !important;
-    height: 45px !important;
-
-    font-size: 20px !important;
-  }
-
-  #prevBranch,
-  .hero__arrow--prev {
-    left: 2% !important;
-  }
-
-  #nextBranch,
-  .hero__arrow--next {
-    right: 2% !important;
-  }
-
-  .hero-shape--circle {
-    width: 85vw;
-  }
-
-  .hero__desc {
-    bottom: 5% !important;
-
-    width: 90% !important;
-
-    font-size: .9rem;
-  }
-
-  .hero__dots {
-    bottom: 0 !important;
-  }
-
-  #branches,
-  #journey,
-  #volunteer,
-  #guidance,
-  #start,
-  #about {
-    padding: 100px 0;
-  }
-
-  .section-head h2,
-  .guidance h2,
-  .start-branch h2,
-  .about h2 {
-    font-size:
-      clamp(2.8rem, 12vw, 5rem);
-  }
-
-  .branch-row {
-    grid-template-columns: 1fr;
-
-    padding: 60px 0;
-
-    gap: 45px;
-  }
-
-  .branch-row__visual {
-    order: 1;
-  }
-
-  .branch-row__content {
-    order: 2;
-
-    padding: 0;
-  }
-
-  .branch-row__image {
-    width:
-      min(80%, 350px);
-  }
-
-  .journey-track {
-    grid-template-columns: 1fr;
-
-    gap: 0;
-  }
-
-  .journey__step,
-  .journey__step:nth-child(3) {
-    padding: 35px 0;
-
-    border-left: 0;
-
-    border-top:
-      1px solid var(--line);
-  }
-
-  .journey__step:first-child {
-    border-top: 0;
-  }
-
-  .vol-strip {
-    grid-template-columns: 1fr;
-  }
-
-  .volunteer-card {
-    border-right: 0;
-
-    border-bottom:
-      1px solid var(--line);
-  }
-
-  .volunteer-card:last-child {
-    border-bottom: 0;
-  }
-
-  .qsu-events {
-    padding-left: 45px;
-
-    margin-top: 80px;
-  }
-
-  .qsu-events::before,
-  .qsu-events__progress {
-    left: 8px;
-  }
-
-  .qsu-event__pin {
-    left: -44px;
-  }
-
-  .qsu-event {
-    padding-bottom: 60px;
-  }
-
-  .qsu-event__card {
-    padding: 22px;
-  }
-
-  .about-copy {
-    margin-top: 60px;
-  }
-
-  .about-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .about-stats > div {
-    border-right: 0;
-
-    border-bottom:
-      1px solid var(--line);
-  }
-
-  .about-stats > div:last-child {
-    border-bottom: 0;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 20px;
-  }
-
-  .footer-links {
-    grid-template-columns: 1fr;
-  }
-
-  .modal {
-    padding: 35px 25px;
-  }
-
-  .quiz-options {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* =========================================================
-   RESPONSIVE — SMALL PHONE
-========================================================= */
-
-@media (max-width: 420px) {
-
-  .hero__stage {
-    height: 420px;
-    min-height: 420px;
-  }
-
-  .hero__type,
-  #heroType {
-    font-size: 48px !important;
-  }
-
-  .hero__central,
-  .hero__visual {
-    width: 62vw !important;
-    height: 62vw !important;
-  }
-
-  .hero__arrows,
-  .hero__branch-controls {
-    top: 56%;
-  }
-
-  .hero__desc {
-    font-size: .82rem;
-  }
-
-  .hero__cta {
-    margin-top: 20px;
-  }
-
-  .pill-btn {
-    min-height: 45px;
-
-    padding-inline: 20px;
-  }
-
-  .modal h2 {
-    font-size: 2.5rem;
-  }
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
-
-  /* Character animation becomes immediately visible */
-
-  .char-motion {
-    opacity: 1 !important;
-
-    transform:
-      translate3d(0, 0, 0)
-      rotate(0deg)
-      scale(1) !important;
-
-    filter: blur(0) !important;
-  }
-
-  /* Fade-only text becomes immediately visible */
-
-  .fade-heading,
-  .hero__desc,
-  .hero__sub,
-  .section-subtitle,
-  .section-description {
-    opacity: 1 !important;
-
-    transform:
-      translateY(0) !important;
-
-    filter: blur(0) !important;
-  }
-
-  /* Reveal elements become immediately visible */
-
-  .reveal,
-  .reveal-left,
-  .reveal-right,
-  .reveal-up,
-  .reveal-scale,
-  .reveal-pop {
-    opacity: 1 !important;
-
-    transform: none !important;
-  }
-}
-
-
 /* =========================================================
    FINAL ANIMATION SAFETY
 ========================================================= */
@@ -4296,11 +3915,9 @@ button,
   .hero__branch-image,
   #heroBranchImage {
     width: 100% !important;
-    height: 100% !important;
+    height: 500px !important;
 
-    max-width: none !important;
-
-    object-fit: contain !important;
+    object-fit: cover !important;
     object-position: center center !important;
 
     border-radius: 50% !important;
@@ -4475,17 +4092,16 @@ button,
   }
 
   .branch-row__image {
-    width: min(82vw, 330px);
-    max-width: 330px;
+  width: min(82vw, 330px);
+  height: min(82vw, 330px);
+  max-width: 330px;
+  max-height: 330px;
 
-    height: auto;
-
-    aspect-ratio: 1 / 1;
-
-    object-fit: cover;
-
-    border-radius: 50%;
-  }
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  display: block;
+}
 
   .branch-row__content {
     width: 100%;
@@ -5285,8 +4901,17 @@ button,
   }
 
   .branch-row__image {
-    width: min(80vw, 290px);
-  }
+  width: min(82vw, 330px);
+  height: min(82vw, 330px);
+  max-width: 330px;
+  max-height: 330px;
+
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  display: block;
+}
+
 
   .branch-row__content h3 {
     font-size:
@@ -5572,7 +5197,7 @@ button,
     width: 100% !important;
     height: 100% !important;
 
-    object-fit: contain !important;
+    object-fit: cover !important;
     object-position: center center !important;
 
     border-radius: 50% !important;
