@@ -667,7 +667,7 @@ body.hero-ready .hero {
 
   max-width: none !important;
 
-  object-fit: cover !important;
+  object-fit: contain !important;
   
 
   border-radius: 50% !important;
@@ -699,7 +699,7 @@ body.hero-ready .hero {
     height: 500px;
     aspect-ratio: 1 / 1;
 
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 
     border-radius: 50%;
@@ -721,7 +721,7 @@ body.hero-ready .hero {
     width: min(85%, 460px);
     height: auto;
     aspect-ratio: 1 / 1;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     border-radius: 50%;
   }
@@ -739,7 +739,7 @@ body.hero-ready .hero {
     height: 100% !important;
     max-width: none !important;
 
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
 
     border-radius: 0 !important;
@@ -1718,7 +1718,7 @@ body.hero-ready .hero {
 
   aspect-ratio: 1 / 1;
 
-  object-fit: cover;
+  object-fit: contain;
 
   border-radius: 50%;
 
@@ -3917,7 +3917,7 @@ button,
     width: 100% !important;
     height: 500px !important;
 
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
 
     border-radius: 50% !important;
@@ -4097,7 +4097,7 @@ button,
   max-width: 330px;
   max-height: 330px;
 
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 50%;
   display: block;
@@ -4906,7 +4906,7 @@ button,
   max-width: 330px;
   max-height: 330px;
 
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 50%;
   display: block;
@@ -5197,7 +5197,7 @@ button,
     width: 100% !important;
     height: 100% !important;
 
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
 
     border-radius: 50% !important;
