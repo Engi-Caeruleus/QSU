@@ -14,7 +14,7 @@ const CONFIG = {
     journalism: "https://docs.google.com/forms/d/e/1FAIpQLSeHrVETIpUTLZaqHLSuOesa07tpMRApQJ5N0X2T-z_ukA0E1Q/viewform?usp=publish-editor",
     performing: "",
     sports: "https://forms.gle/ApeMGoR4PPRdi5FE8",
-    counselling: "https://forms.gle/DVzwSnZdtY36hqqS7"
+    counselling: "https://forms.gle/PyXiPaWTf9RZ4fLH9"
   }
 };
 
@@ -995,224 +995,366 @@ function initializeFadeHeadings() {
 
 function initializeLoader() {
 
-  const loader =
-    document.getElementById(
-      "qsuLoader"
-    );
+  const loader = document.getElementById("qsuLoader");
 
+  /* No loader in the page: just show the site. */
 
   if (!loader) {
-
     isLoaderFinished = true;
+    revealSite();
+    return;
+  }
+
+  document.body.classList.add("qsu-loading");
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const logoBox   = loader.querySelector(".qsu-loader__logo");
+  const spin      = loader.querySelector(".qsu-loader__logo-spin");
+  const backdrop  = loader.querySelector(".qsu-loader__backdrop");
+  const meta      = loader.querySelector(".qsu-loader__meta");
+  const ring      = loader.querySelector(".qsu-loader__ring");
+  const percentEl = loader.querySelector(".qsu-loader__percent");
+  const baseImg   = loader.querySelector(".qsu-loader__layer--base");
+  const backImg   = loader.querySelector(".qsu-loader__layer--back");
+  const frontImg  = loader.querySelector(".qsu-loader__layer--front");
 
 
-    const hero =
-      document.querySelector(
-        ".hero"
-      );
+  /* ---------- timing ---------- */
+
+  const MIN_FILL_MS = reduceMotion ? 700 : 2800;   // quickest the fill can finish
+  const MAX_WAIT_MS = 9000;                        // never wait longer than this
+  const HOLD_FULL_MS = reduceMotion ? 150 : 450;   // pause when the logo is full
+  const EXIT_MS = 2800;                            // spin + expand duration
+
+  let pageReady = false;
+  let exiting = false;
+  let done = false;
 
 
-    if (hero) {
+  /* ---------- is the page actually ready? ---------- */
 
-      hero.classList.add(
-        "hero-ready"
-      );
+  Promise.all([
+
+    document.readyState === "complete"
+      ? Promise.resolve()
+      : new Promise(resolve =>
+          window.addEventListener("load", resolve, { once: true })
+        ),
+
+    document.fonts && document.fonts.ready
+      ? document.fonts.ready
+      : Promise.resolve()
+
+  ]).then(() => { pageReady = true; });
+
+  setTimeout(() => { pageReady = true; }, MAX_WAIT_MS);
+
+
+  /* Fail-safe: whatever happens, never trap the visitor. */
+
+  setTimeout(() => {
+    if (!done) finishLoader();
+  }, MAX_WAIT_MS + 6000);
+
+
+  /* ---------- logo ready (so the fill never starts on a blank box) ---------- */
+
+  const decoded = baseImg && baseImg.decode
+    ? baseImg.decode().catch(() => {})
+    : Promise.resolve();
+
+  Promise.race([
+    decoded,
+    new Promise(resolve => setTimeout(resolve, 1500))
+  ]).then(() => {
+
+    if (baseImg && baseImg.naturalWidth && logoBox) {
+
+      const ratio = baseImg.naturalWidth / baseImg.naturalHeight;
+
+      logoBox.style.setProperty("--logo-ar", ratio.toFixed(4));
+      logoBox.classList.toggle("is-tall", ratio < 1);
 
     }
 
+    loader.classList.add("is-ready");
 
-    return;
+    startFill();
+
+  });
+
+
+  /* ---------- liquid ---------- */
+
+  const WAVE_POINTS = 40;
+  const WAVE_AMP = 3.6;           // % of logo height
+
+  function setWave(el, level, phase, amp) {
+
+    /*
+       level 0 -> empty, 1 -> full.
+       The waterline travels from just below the logo to just above it,
+       so 0 shows nothing and 1 covers everything whatever the wave does.
+    */
+
+    const A = WAVE_AMP;
+    const base = 100 + A - level * (100 + 2 * A);
+
+    const points = [];
+
+    for (let i = 0; i <= WAVE_POINTS; i++) {
+
+      const t = i / WAVE_POINTS;
+
+      const y =
+        base +
+        amp * 0.70 * Math.sin(t * Math.PI * 3.0 + phase) +
+        amp * 0.30 * Math.sin(t * Math.PI * 5.4 - phase * 1.35);
+
+      points.push(`${(t * 100).toFixed(2)}% ${y.toFixed(2)}%`);
+
+    }
+
+    points.push("100% 115%", "0% 115%");
+
+    el.style.clipPath = `polygon(${points.join(",")})`;
+
+  }
+
+  const easeInOutSine = t => -(Math.cos(Math.PI * t) - 1) / 2;
+  const smoothstep = (a, b, x) => {
+    const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+    return t * t * (3 - 2 * t);
+  };
+
+  function startFill() {
+
+    let displayed = 0;
+    let lastPercent = -1;
+
+    const startTime = performance.now();
+    let lastTime = startTime;
+
+    function frame(now) {
+
+      if (done || exiting) return;
+
+      const dt = Math.min(0.05, (now - lastTime) / 1000);
+      lastTime = now;
+
+      const elapsed = now - startTime;
+
+      /*
+         Target follows a gentle ease over MIN_FILL_MS.
+         If the page isn't ready by then, it waits near the top
+         (creeping slowly) and finishes as soon as the page is ready.
+      */
+
+      let cap = 1;
+
+      if (!pageReady) {
+        cap = 0.9 + Math.min(0.06, Math.max(0, elapsed - MIN_FILL_MS) / 30000);
+      }
+
+      const target = Math.min(
+        easeInOutSine(Math.min(1, elapsed / MIN_FILL_MS)),
+        cap
+      );
+
+      /* soft follow so speed changes are never abrupt */
+
+      displayed += (target - displayed) * (1 - Math.exp(-dt * 7));
+
+      const full = target >= 1 && displayed > 0.997;
+
+      if (full) displayed = 1;
+
+      loader.style.setProperty("--fill", displayed.toFixed(4));
+
+      const percent = Math.round(displayed * 100);
+
+      if (percent !== lastPercent && percentEl) {
+        percentEl.textContent = `${percent}%`;
+        lastPercent = percent;
+      }
+
+      if (full) {
+
+        frontImg.style.clipPath = "none";
+        backImg.style.clipPath = "none";
+
+        loader.classList.add("is-full");
+
+        setTimeout(runExit, HOLD_FULL_MS);
+
+        return;
+
+      }
+
+      /* calmer water as it reaches the top */
+
+      const calm = 1 - 0.65 * smoothstep(0.88, 1, displayed);
+      const time = now / 1000;
+
+      setWave(frontImg, displayed, time * 2.3, WAVE_AMP * calm);
+
+      setWave(
+        backImg,
+        Math.min(1, displayed + 0.035),
+        -time * 1.7 + 1.9,
+        WAVE_AMP * 0.9 * calm
+      );
+
+      requestAnimationFrame(frame);
+
+    }
+
+    requestAnimationFrame(frame);
 
   }
 
 
-  document.body.classList.add(
-    "qsu-loading"
-  );
+  /* ---------- exit: spin + expand, then reveal the site ---------- */
 
+  function runExit() {
 
-  let progress = 0;
+    if (exiting || done) return;
 
+    exiting = true;
 
-  const progressBar =
-    loader.querySelector(
-      ".qsu-loader__progress-track span"
-    );
+    loader.classList.add("is-exiting");
 
+    const canAnimate = typeof spin.animate === "function";
 
-  const progressText =
-    loader.querySelector(
-      ".qsu-loader__percent"
-    );
+    /* Simple cross-fade for reduced motion / very old browsers. */
 
+    if (reduceMotion || !canAnimate) {
 
-  /*
-     Slow smooth percentage counter.
+      revealSite();
 
-     1%
-     2%
-     3%
-     ...
-     100%
-  */
+      loader.style.transition = "opacity .6s ease";
+      loader.style.opacity = "0";
 
-  const progressTimer =
-    setInterval(
-      () => {
+      setTimeout(finishLoader, 650);
 
-        progress++;
+      return;
 
+    }
 
-        if (progressBar) {
+    /* name + percent + ring step aside first */
 
-          progressBar.style.width =
-            `${progress}%`;
-
-        }
-
-
-        if (progressText) {
-
-          progressText.textContent =
-            `${progress}%`;
-
-        }
-
-
-        if (
-          progress >= 100
-        ) {
-
-          clearInterval(
-            progressTimer
-          );
-
-        }
-
-      },
-      50
-    );
-
-
-  setTimeout(
-    () => {
-
-      loader.classList.add(
-        "loader-logo-complete"
+    [meta, ring].forEach(el => {
+      if (!el) return;
+      el.animate(
+        [{ opacity: getComputedStyle(el).opacity }, { opacity: 0 }],
+        { duration: 450, easing: "ease", fill: "forwards" }
       );
+    });
 
-    },
-    50
-  );
+    /*
+       The logo spins one full turn and expands slowly at first,
+       then faster, until it fills the whole screen.
+    */
 
-
-  setTimeout(
-    () => {
-
-      loader.classList.add(
-        "loader-name-complete"
-      );
-
-    },
-    1200
-  );
-
-
-  setTimeout(
-    () => {
-
-      loader.classList.add(
-        "show-welcome"
-      );
-
-    },
-    1750
-  );
-
-
-  /*
-     Loader leaves after the full
-     introductory animation.
-  */
-
-  setTimeout(
-    () => {
-
-      loader.classList.add(
-        "is-leaving"
-      );
-
-
-      document.body.classList.remove(
-        "qsu-loading"
-      );
-
-
-      isLoaderFinished =
-        true;
-
-
-      const hero =
-        document.querySelector(
-          ".hero"
-        );
-
-
-      if (hero) {
-
-        requestAnimationFrame(
-          () => {
-
-            hero.classList.add(
-              "hero-ready"
-            );
-
-
-            const heroType =
-              document.getElementById(
-                "heroType"
-              );
-
-
-            if (heroType) {
-
-              animateCharacterMotion(
-                heroType,
-                BRANCHES[
-                  currentBranchIndex
-                ].type
-              );
-
-            }
-
-          }
-        );
-
+    spin.animate(
+      [
+        { transform: "rotate(0deg) scale(1)",    offset: 0    },
+        { transform: "rotate(60deg) scale(1.08)", offset: 0.16 },
+        { transform: "rotate(170deg) scale(1.9)", offset: 0.40 },
+        { transform: "rotate(290deg) scale(6)",   offset: 0.68 },
+        { transform: "rotate(360deg) scale(28)",  offset: 1    }
+      ],
+      {
+        duration: EXIT_MS,
+        easing: "cubic-bezier(.55, 0, .3, 1)",
+        fill: "forwards"
       }
+    );
 
-    },
-    6500
-  );
+    /* maroon backdrop dissolves while the logo is growing */
 
-
-  /*
-     Remove loader from DOM.
-  */
-
-  setTimeout(
-    () => {
-
-      if (
-        loader.parentNode
-      ) {
-
-        loader.remove();
-
+    backdrop.animate(
+      [{ opacity: 1 }, { opacity: 0 }],
+      {
+        duration: 1200,
+        delay: 1300,
+        easing: "ease-in-out",
+        fill: "forwards"
       }
+    );
 
-    },
-    6800
-  );
+    /* and the (now huge) logo melts away last */
+
+    spin.animate(
+      [{ opacity: 1 }, { opacity: 0 }],
+      {
+        duration: 900,
+        delay: 1900,
+        easing: "ease-out",
+        fill: "forwards"
+      }
+    );
+
+    /* the site starts animating in as the backdrop clears */
+
+    setTimeout(revealSite, 1700);
+
+    setTimeout(finishLoader, EXIT_MS + 150);
+
+  }
+
+
+  function finishLoader() {
+
+    if (done) return;
+
+    done = true;
+
+    revealSite();
+
+    isLoaderFinished = true;
+
+    if (loader.parentNode) {
+      loader.remove();
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   REVEAL SITE
+   Unlocks scrolling and plays the hero entrance (once).
+========================================================= */
+
+let siteRevealed = false;
+
+function revealSite() {
+
+  if (siteRevealed) return;
+
+  siteRevealed = true;
+
+  document.body.classList.remove("qsu-loading");
+
+  const hero = document.querySelector(".hero");
+
+  if (hero) {
+    hero.classList.add("hero-ready");
+  }
+
+  const heroType = document.getElementById("heroType");
+
+  if (heroType) {
+    animateCharacterMotion(
+      heroType,
+      BRANCHES[currentBranchIndex].type
+    );
+  }
 
 }
 
@@ -1509,14 +1651,13 @@ function initializeHero() {
    if (heroImage) {
   heroImage.style.cursor = "pointer";
 
-  heroImage.addEventListener("click", () => {
-    const branch = BRANCHES[currentBranchIndex];
-    const formUrl = CONFIG.googleForms[branch.id];
+  heroImage.addEventListener("click", openHeroBranchForm);
+}
 
-    if (formUrl) {
-      window.open(formUrl, "_blank", "noopener,noreferrer");
-    }
-  });
+   const heroJoin = document.getElementById("heroJoin");
+
+   if (heroJoin) {
+  heroJoin.addEventListener("click", openHeroBranchForm);
 }
 
   renderHeroDots();
@@ -1578,6 +1719,11 @@ function updateHero(
 
 
   if (!branch) return;
+
+
+  const heroEl = document.querySelector(".hero");
+
+  if (heroEl) heroEl.dataset.branch = branch.id;
 
 
   const type =
@@ -1883,6 +2029,8 @@ function renderBranches() {
         }`;
 
 
+      article.dataset.branch = branch.id;
+
       article.style.setProperty(
         "--reveal-delay",
         `${index * 100}ms`
@@ -1904,12 +2052,14 @@ function renderBranches() {
             src="${branch.image}"
             alt="${branch.name}"
             loading="lazy"
-            width="1200"
-            height="800"
           >
         </div>
 
         <div class="branch-row__content">
+
+          <span class="branch-row__meta">
+            Branch ${String(index + 1).padStart(2, "0")} / ${String(BRANCHES.length).padStart(2, "0")}
+          </span>
 
           <span class="branch-row__eyebrow">
             ${branch.type}
@@ -3405,6 +3555,15 @@ function initializeImageEffects() {
     .forEach(
       image => {
 
+        /* the loader's logo layers manage their own look */
+
+        if (image.closest(".qsu-loader")) {
+
+          return;
+
+        }
+
+
         image.classList.add(
           "image-loading"
         );
@@ -4652,3 +4811,51 @@ document.addEventListener(
 
   }
 );
+
+
+/* =========================================================
+   SCROLL PROGRESS (drives the nav progress bar)
+========================================================= */
+
+(function () {
+
+  const root = document.documentElement;
+
+  function updateScrollProgress() {
+
+    const max = root.scrollHeight - window.innerHeight;
+
+    root.style.setProperty(
+      "--scroll",
+      max > 0 ? Math.min(1, window.scrollY / max) : 0
+    );
+
+  }
+
+  window.addEventListener("scroll", updateScrollProgress, { passive: true });
+  window.addEventListener("resize", updateScrollProgress);
+
+  updateScrollProgress();
+
+})();
+
+
+
+/* =========================================================
+   HERO — OPEN CURRENT BRANCH SIGN-UP FORM
+   (used by the hero image and the "Join" badge)
+========================================================= */
+
+function openHeroBranchForm() {
+
+  const branch = BRANCHES[currentBranchIndex];
+
+  if (!branch) return;
+
+  const formUrl = CONFIG.googleForms[branch.id];
+
+  if (formUrl) {
+    window.open(formUrl, "_blank", "noopener,noreferrer");
+  }
+
+}
