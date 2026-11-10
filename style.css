@@ -6431,3 +6431,433 @@ footer {
   object-fit: contain !important;
   object-position: center center !important;
 }
+
+
+/* =========================================================
+   SPORTS BRANCH — ANIMATED UPCOMING WARNING TAPE
+   Only the Sports branch receives this yellow/black tape.
+========================================================= */
+
+#branches .branch-upcoming-tape {
+  position: relative;
+  display: block;
+  width: min(100%, 420px);
+  height: 38px;
+  margin: 2px 0 18px;
+  overflow: hidden;
+  border: 2px solid #171717;
+  background: repeating-linear-gradient(
+    135deg,
+    #f5d323 0,
+    #f5d323 16px,
+    #171717 16px,
+    #171717 32px
+  );
+  box-shadow: 4px 4px 0 rgba(37, 27, 23, .16);
+  transform: rotate(-1.2deg);
+}
+
+#branches .branch-upcoming-tape__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 100%;
+  animation: sportsTapeScroll 13s linear infinite;
+  will-change: transform;
+}
+
+#branches .branch-upcoming-tape__track span {
+  flex: 0 0 auto;
+  display: block;
+  padding: 0 12px;
+  color: #171717;
+  font-family: "DM Mono", monospace;
+  font-size: .78rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .12em;
+  white-space: nowrap;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .18);
+}
+
+@keyframes sportsTapeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #branches .branch-upcoming-tape__track {
+    animation: none;
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   SPORTS UPCOMING — CROSSING WARNING TAPES (X)
+   Applied only to the Sports branch and its hero state.
+========================================================= */
+
+#branches .branch-upcoming-cross {
+  position: relative;
+  width: min(100%, 330px);
+  height: 116px;
+  margin: 0 0 18px;
+  isolation: isolate;
+  filter: drop-shadow(0 9px 7px rgba(0, 0, 0, .38));
+}
+
+.branch-upcoming-cross__ribbon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 112%;
+  height: 35px;
+  overflow: hidden;
+  border: 2px solid #111;
+  background: repeating-linear-gradient(135deg, #f7d51f 0 16px, #171717 16px 32px);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .42), inset 0 1px 0 rgba(255,255,255,.28);
+  transform-origin: center;
+}
+
+.branch-upcoming-cross__ribbon--one { transform: translate(-50%, -50%) rotate(20deg); }
+.branch-upcoming-cross__ribbon--two { transform: translate(-50%, -50%) rotate(-20deg); }
+
+.branch-upcoming-cross__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 100%;
+  animation: sportsTapeScroll 11s linear infinite;
+  will-change: transform;
+}
+
+.branch-upcoming-cross__track span {
+  flex: 0 0 auto;
+  padding: 0 10px;
+  color: #fff;
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .11em;
+  white-space: nowrap;
+  text-shadow: 0 2px 2px rgba(0,0,0,.9);
+}
+
+/* The hero version sits over the branch image when Sports is selected. */
+.hero-upcoming-cross {
+  display: none;
+  position: absolute;
+  z-index: 35;
+  left: 50%;
+  top: 50%;
+  width: min(90%, 390px);
+  height: 160px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: drop-shadow(0 12px 10px rgba(0,0,0,.58));
+}
+
+.hero[data-branch="sports"] .hero-upcoming-cross { display: block; }
+.hero-upcoming-cross .branch-upcoming-cross__ribbon { height: 42px; border-width: 3px; }
+.hero-upcoming-cross .branch-upcoming-cross__track span { font-size: 15px; }
+
+@media (max-width: 600px) {
+  #branches .branch-upcoming-cross { width: min(100%, 270px); height: 104px; }
+  .hero-upcoming-cross { width: 96%; height: 128px; }
+  .hero-upcoming-cross .branch-upcoming-cross__ribbon { height: 34px; }
+  .hero-upcoming-cross .branch-upcoming-cross__track span { font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .branch-upcoming-cross__track { animation: none; }
+}
+
+/* =========================================================
+   SPORTS ONLY — LARGER, CENTERED UPCOMING X
+   Normal document flow keeps the Sports row from overlapping
+   neighboring branch rows. All other branches stay unchanged.
+========================================================= */
+
+#branches .branch-row[data-branch="sports"] {
+  min-height: 560px;
+  padding: clamp(44px, 5vw, 76px) clamp(28px, 5vw, 76px);
+  align-items: center;
+  gap: clamp(28px, 4vw, 64px);
+}
+
+#branches .branch-row[data-branch="sports"] .branch-row__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  min-width: 0;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-row__meta,
+#branches .branch-row[data-branch="sports"] .branch-row__eyebrow,
+#branches .branch-row[data-branch="sports"] .branch-row__description,
+#branches .branch-row[data-branch="sports"] .branch-row__tags {
+  text-align: center;
+  justify-content: center;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-upcoming-cross {
+  width: min(100%, 500px);
+  height: 190px;
+  margin: 12px auto 28px;
+  flex: 0 0 auto;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-upcoming-cross__ribbon {
+  height: 48px;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-upcoming-cross__track span {
+  font-size: 16px;
+  padding-inline: 14px;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-row__content h3 {
+  text-align: center;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Bigger X over the hero image, still contained within the hero visual. */
+.hero-upcoming-cross {
+  width: min(96%, 620px);
+  height: clamp(210px, 24vw, 290px);
+}
+
+.hero-upcoming-cross .branch-upcoming-cross__ribbon {
+  height: clamp(48px, 5vw, 62px);
+  border-width: 4px;
+}
+
+.hero-upcoming-cross .branch-upcoming-cross__track span {
+  font-size: clamp(16px, 1.6vw, 20px);
+  padding-inline: 16px;
+}
+
+@media (max-width: 800px) {
+  #branches .branch-row[data-branch="sports"] {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "img"
+      "content";
+    gap: 30px;
+  }
+
+  #branches .branch-row[data-branch="sports"] .branch-row__image-wrap {
+    width: min(78%, 320px);
+  }
+
+  #branches .branch-row[data-branch="sports"] .branch-upcoming-cross {
+    width: min(100%, 430px);
+    height: 166px;
+  }
+
+  .hero-upcoming-cross {
+    width: 98%;
+    height: clamp(150px, 34vw, 220px);
+  }
+}
+
+@media (max-width: 600px) {
+  #branches .branch-row[data-branch="sports"] {
+    padding: 38px 20px;
+  }
+
+  #branches .branch-row[data-branch="sports"] .branch-upcoming-cross {
+    width: min(100%, 330px);
+    height: 140px;
+    margin: 8px auto 22px;
+  }
+
+  #branches .branch-row[data-branch="sports"] .branch-upcoming-cross__ribbon {
+    height: 36px;
+  }
+
+  #branches .branch-row[data-branch="sports"] .branch-upcoming-cross__track span {
+    font-size: 12px;
+    padding-inline: 9px;
+  }
+
+  .hero-upcoming-cross {
+    width: 96%;
+    height: 145px;
+  }
+
+  .hero-upcoming-cross .branch-upcoming-cross__ribbon {
+    height: 36px;
+    border-width: 3px;
+  }
+
+  .hero-upcoming-cross .branch-upcoming-cross__track span {
+    font-size: 12px;
+    padding-inline: 9px;
+  }
+}
+
+
+/* =========================================================
+   SPORTS — CAUTION TAPE v2 + DARK SHADE
+   Appended last so it overrides the earlier tape styles.
+   Real hazard-tape look: striped edges, black label band with
+   yellow text, glossy sheen, torn ends, soft swaying motion.
+========================================================= */
+
+.branch-upcoming-cross__ribbon {
+  border: 0 !important;
+  border-radius: 2px;
+  background:
+    linear-gradient(#0f0f0f, #0f0f0f) center / 100% 64% no-repeat,
+    repeating-linear-gradient(135deg, #ffd91a 0 14px, #121212 14px 28px) !important;
+  box-shadow:
+    0 6px 0 rgba(0, 0, 0, .35),
+    0 14px 18px rgba(0, 0, 0, .45),
+    inset 0 2px 0 rgba(255, 255, 255, .35),
+    inset 0 -2px 0 rgba(0, 0, 0, .35) !important;
+  /* torn / notched tape ends */
+  clip-path: polygon(
+    0 0, 100% 0, 99% 12%, 100% 25%, 99% 38%, 100% 50%, 99% 62%, 100% 75%, 99% 88%, 100% 100%,
+    0 100%, 1% 88%, 0 75%, 1% 62%, 0 50%, 1% 38%, 0 25%, 1% 12%
+  );
+}
+
+/* glossy sheen that slowly sweeps across the tape */
+.branch-upcoming-cross__ribbon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%) 0 0 / 220% 100%,
+    linear-gradient(180deg, rgba(255, 255, 255, .22), transparent 40%, rgba(0, 0, 0, .22));
+  animation: tapeSheen 5.5s ease-in-out infinite;
+}
+
+@keyframes tapeSheen {
+  0%   { background-position: 160% 0, 0 0; }
+  60%, 100% { background-position: -60% 0, 0 0; }
+}
+
+.branch-upcoming-cross__track {
+  position: relative;
+  z-index: 2;
+}
+
+.branch-upcoming-cross__track span {
+  color: #ffd91a !important;
+  text-shadow: 0 0 8px rgba(255, 217, 26, .45), 0 1px 0 #000 !important;
+  letter-spacing: .2em !important;
+}
+
+/* the two tapes sway gently, like they're hanging */
+.branch-upcoming-cross__ribbon--one {
+  animation: tapeSwayOne 6s ease-in-out infinite;
+}
+.branch-upcoming-cross__ribbon--two {
+  animation: tapeSwayTwo 6s ease-in-out infinite;
+}
+
+@keyframes tapeSwayOne {
+  0%, 100% { transform: translate(-50%, -50%) rotate(20deg); }
+  50%      { transform: translate(-50%, -50%) rotate(18.2deg); }
+}
+@keyframes tapeSwayTwo {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-20deg); }
+  50%      { transform: translate(-50%, -50%) rotate(-18.2deg); }
+}
+
+/* little pin where the tapes cross */
+.branch-upcoming-cross::after,
+.hero-upcoming-cross::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 5;
+  visibility: hidden;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 30%, #d9d9d9, #5a5a5a 60%, #222);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .6);
+}
+
+/* ---------- DARK SHADE: hero when Sports is selected ---------- */
+
+.hero__circle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 22;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(0, 0, 0, .25), rgba(0, 0, 0, .78) 85%);
+  transition: opacity .6s ease;
+}
+
+.hero[data-branch="sports"] .hero__circle::after {
+  opacity: 1;
+}
+
+.hero[data-branch="sports"] #heroBranchImage {
+  filter: brightness(.5) saturate(.7) contrast(1.05);
+}
+
+.hero[data-branch="sports"] .hero__circle {
+  border-color: #1b1b1b !important;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, .55),
+    0 0 0 3px rgba(255, 217, 26, .55) !important;
+}
+
+/* ---------- DARK SHADE: Sports row in the branches list ---------- */
+
+#branches .branch-row[data-branch="sports"] .branch-row__image-wrap {
+  background:
+    radial-gradient(circle at 50% 40%, #2b2b2b, #0c0c0c) !important;
+  border-color: rgba(255, 217, 26, .55) !important;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-row__image-wrap img {
+  filter: brightness(.5) saturate(.7) contrast(1.05);
+}
+
+#branches .branch-row[data-branch="sports"] {
+  background:
+    linear-gradient(135deg, rgba(24, 24, 24, .92), rgba(var(--accent-rgb), .35)) !important;
+  border-color: rgba(255, 217, 26, .4) !important;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-row__content h3,
+#branches .branch-row[data-branch="sports"] .branch-row__description,
+#branches .branch-row[data-branch="sports"] .branch-row__eyebrow,
+#branches .branch-row[data-branch="sports"] .branch-row__meta {
+  color: #f4efe6 !important;
+}
+
+#branches .branch-row[data-branch="sports"] .branch-row__tags span {
+  color: #f4efe6 !important;
+  border-color: rgba(255, 217, 26, .5) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .branch-upcoming-cross__ribbon--one,
+  .branch-upcoming-cross__ribbon--two,
+  .branch-upcoming-cross__ribbon::after { animation: none; }
+}

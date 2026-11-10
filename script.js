@@ -2065,6 +2065,17 @@ function renderBranches() {
             ${branch.type}
           </span>
 
+          ${branch.id === "sports" ? `
+            <div class="branch-upcoming-cross" role="status" aria-label="Sports branch upcoming">
+              <div class="branch-upcoming-cross__ribbon branch-upcoming-cross__ribbon--one" aria-hidden="true">
+                <div class="branch-upcoming-cross__track"><span>UPCOMING ✦ UPCOMING ✦ UPCOMING ✦ </span><span>UPCOMING ✦ UPCOMING ✦ UPCOMING ✦ </span></div>
+              </div>
+              <div class="branch-upcoming-cross__ribbon branch-upcoming-cross__ribbon--two" aria-hidden="true">
+                <div class="branch-upcoming-cross__track"><span>UPCOMING ✦ UPCOMING ✦ UPCOMING ✦ </span><span>UPCOMING ✦ UPCOMING ✦ UPCOMING ✦ </span></div>
+              </div>
+            </div>
+          ` : ""}
+
           <h3 class="section-heading">
             ${branch.name}
           </h3>
