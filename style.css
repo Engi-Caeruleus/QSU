@@ -447,7 +447,7 @@ section {
   font-size: clamp(2.5rem, 10vw, 5rem);
   font-weight: 800;
   letter-spacing: -.06em;
-
+  visibility: hidden;
   padding: 10px 0;
 
   transition:
